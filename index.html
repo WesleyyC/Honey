@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html ng-app="todoApp">
+<head>
+    <title>Honey, can you pick up...</title>
+    <link href="bootstrap.css" rel="stylesheet" />
+    <link href="bootstrap-theme.css" rel="stylesheet" />
+    <script src="angular.js"></script>
+    <script src="main.js"></script>
+</head>
+<body ng-controller="ToDoCtrl" background="http://www.zingerbug.com/Backgrounds/background_images/wrinkled_white_paper_background_1800x1600.jpg">
+    <div class="page-header">
+        <h1 style="margin-left: 25px; font-family: cursive; font-size:350%;">
+            Honey, can you pick up ...
+            <span class="label label-default" ng-class="warningLevel()"
+                  ng-hide="itemCount() == 0" style="float: right; margin-right: 60px;">
+                {{itemCount()}}
+            </span>
+        </h1>
+    </div>
+    <div class="panel" style = "background-color: transparent;">
+        <div class="input-group"style="margin-left: 15px; margin-right: 60px; margin-bottom: 10px;" >
+            <input class="form-control" ng-model="actionText" id="addText" style="background: rgba(255,255,255,0.5);" onkeydown="if (event.keyCode == 13) document.getElementById('addBtn').click()";>
+            <span class="input-group-btn">
+                <button class="btn btn-default"
+                        ng-click="addNewItem(actionText)"
+                        id="addBtn">Add</button>
+            </span>
+        </div>
+        <table class="table" style="background: rgba(255,255,255,0.5)">
+            <thead>
+                <tr>
+                    <th style="width: 60px; text-align: center;">Aisle</th>
+                    <th style="width: 120px;">Item</th>
+                    <th style="width: 60px;">Quantity</th>
+                    <th style="width: 200px;">Details</th>
+                    <th style="width: 60px;">Pick Up</th>
+                    <th style="width: 60px;">Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat=
+                        "item in todo.items | checkedItems:todo.showComplete| orderBy:sortingMethod()">
+                    <td style="width: 60px; text-align: center;">{{item.aisle}}</td>
+                    <td>{{item.name}}</td>
+                    <td><input type="number" ng-model="item.quantity" style="width: 60px; text-align: center; background: rgba(255,255,255,0.5);"/></td>
+                    <td><input type="text" ng-model="item.details" style="width: 200px; background: rgba(255,255,255,0.5);"/></td>
+                    <td><input type="checkbox" ng-model="item.done" style="width: 60px ;"/></td>
+                    <td><input type="checkbox" ng-model="item.delete" style="width: 60px;"/></td>
+                </tr>
+            </tbody>
+        </table>
+        <div style="margin-left: 15px; margin-top: 15px;">
+            <label>Show Complete <input type="checkbox" ng_model="todo.showComplete"></label>
+        </div>
+        <div style="margin-left: 15px;">
+            <label>Sort by:   Aisle <input type="checkbox" ng_model="todo.sortByAisle" ng-click="checkModify(true)"></label>
+            <label>Quantity <input type="checkbox" ng_model="todo.sortByQuantity" ng-click="checkModify(false)"></label>
+        </div>
+        <div style="text-align: right; margin-right: 250px; font-size:200%;">
+            <label style = "color: firebrick;" >&lt3 </label>
+            <label style = "font-family: cursive;">Love you, </label>
+        </div>
+        <div style="text-align: right; margin-right: 180px; font-size:200%; font-family: cursive;">
+            {{todo.user}}
+        </div>
+    </div>
+</body>
+</html>
