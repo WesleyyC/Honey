@@ -5,7 +5,7 @@ var express = require('express');
 var app = express();
 
 // serve static content from the public folder
-app.use("/", express.static(__dirname + '/'));
+app.use("/", express.static(__dirname + '/public'));
 
 // listen on port 4000
 var port = 4000;
